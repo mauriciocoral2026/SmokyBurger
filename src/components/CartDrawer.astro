@@ -100,6 +100,7 @@
   function render(items: Item[] = load()) {
     const wrap = document.getElementById('cart-items')!;
     const countEl = document.getElementById('cart-count')!;
+    const cartOpenBtn = document.getElementById('cart-open') as HTMLButtonElement | null;
     const subtotalEl = document.getElementById('cart-subtotal')!;
     const deliveryEl = document.getElementById('cart-delivery')!;
     const totalEl = document.getElementById('cart-total')!;
@@ -119,7 +120,7 @@
       const row = document.createElement('div');
       row.className = 'flex items-center gap-3 rounded-2xl border border-black/10 p-3';
       row.innerHTML = `
-        <img src="${p.foto}" alt="${p.nombre}" class="h-16 w-16 border border-black/10 object-contain bg-white p-0.5" />
+        <img src="${p.foto}" alt="${p.nombre}" width="${p.fotoW}" height="${p.fotoH}" loading="lazy" decoding="async" class="h-16 w-16 border border-black/10 object-contain bg-white p-0.5" />
         <div class="flex-1 min-w-0">
           <p class="truncate text-sm font-black">${p.nombre}</p>
           <p class="text-sm text-smoke">${formatCOP(p.precio)}</p>
@@ -141,11 +142,16 @@
     deliveryEl.textContent = formatCOP(delivery);
     totalEl.textContent = formatCOP(total + delivery);
     barTotalEl.textContent = formatCOP(total + delivery);
+    const hasItems = count > 0;
     countEl.textContent = String(count);
-    countEl.classList.toggle('hidden', count === 0);
-    bar.classList.toggle('hidden', count === 0);
-    emptyMsg.style.display = count === 0 ? 'block' : 'none';
-    btn.disabled = count === 0;
+    countEl.classList.toggle('hidden', !hasItems);
+    bar.classList.toggle('hidden', !hasItems);
+    if (cartOpenBtn) {
+      cartOpenBtn.disabled = !hasItems;
+      cartOpenBtn.setAttribute('aria-disabled', String(!hasItems));
+    }
+    emptyMsg.style.display = hasItems ? 'none' : 'block';
+    btn.disabled = !hasItems;
   }
 
   function open() {
@@ -174,6 +180,11 @@
   document.addEventListener('smoky-add', ((e: CustomEvent) => {
     if (e.detail?.id) add(e.detail.id);
   }) as EventListener);
+
+  const telefonoInput = document.querySelector('#checkout-form [name="telefono"]') as HTMLInputElement | null;
+  telefonoInput?.addEventListener('input', () => {
+    telefonoInput.value = telefonoInput.value.replace(/\D/g, '').slice(0, 10);
+  });
 
   // Checkout → WhatsApp
   document.getElementById('checkout-form')?.addEventListener('submit', (e) => {

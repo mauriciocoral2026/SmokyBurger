@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { Producto } from '../data/menu';
 import { formatCOP } from '../data/menu';
 
@@ -10,11 +11,14 @@ const { producto } = Astro.props;
 <article class="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-xl">
   <a href={`/menu/${producto.slug}`} aria-label={producto.nombre}>
     <div class="relative h-48 w-full overflow-hidden bg-white">
-      <img
+      <Image
         src={producto.foto}
         alt={producto.nombre}
         title={producto.nombre}
+        width={producto.fotoW}
+        height={producto.fotoH}
         loading="lazy"
+        decoding="async"
         class="h-full w-full object-contain p-4"
       />
       <span class="absolute left-3 top-3 rounded-full bg-[#ff520d] px-3 py-1 text-xs font-medium text-white">

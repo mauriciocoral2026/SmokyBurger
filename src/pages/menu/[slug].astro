@@ -1,7 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { productos, getProducto, formatCOP } from '../../data/menu';
-import { whatsappLink } from '../../config';
 
 export function getStaticPaths() {
   return productos.map((p) => ({ params: { slug: p.slug }, props: { producto: p } }));
@@ -15,7 +15,15 @@ if (!p) throw new Error('Producto no encontrado: ' + Astro.params.slug);
     <div class="overflow-hidden rounded-2xl bg-white shadow-xl">
       <div class="grid md:grid-cols-[45%_55%]">
         <div class="relative bg-white p-6">
-          <img src={p.foto} alt={p.nombre} class="h-full w-full object-contain" />
+          <Image
+            src={p.foto}
+            alt={p.nombre}
+            width={p.fotoW}
+            height={p.fotoH}
+            loading="eager"
+            decoding="async"
+            class="h-full w-full object-contain"
+          />
         </div>
         <div class="flex max-h-[80vh] flex-col">
           <div class="flex items-start justify-between border-b border-gray-100 p-6">

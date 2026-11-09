@@ -1,16 +1,27 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import ProductCard from '../components/ProductCard.astro';
 import { productos } from '../data/menu';
-import { config, whatsappLink } from '../config';
+import { config } from '../config';
 
-const populares = productos.filter((p) => p.popular);
-const heroImg = productos[0]?.foto || '/img/burgers/explosion-de-barril.svg';
+const hero = productos[0];
+const heroImg = hero?.foto || '/img/burgers/explosion-de-barril.svg';
+const heroW = hero?.fotoW || 896;
+const heroH = hero?.fotoH || 1194;
 ---
 <Base>
   <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
     <div class="absolute inset-0">
-      <img src={heroImg} alt="" class="h-full w-full object-cover object-center" />
+      <Image
+        src={heroImg}
+        alt=""
+        width={heroW}
+        height={heroH}
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+        class="h-full w-full object-cover object-center"
+      />
       <div class="absolute inset-0 bg-black/70"></div>
     </div>
     <div class="relative mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
