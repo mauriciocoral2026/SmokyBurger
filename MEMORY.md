@@ -7,10 +7,12 @@
 - Botón carrito naranja (#FF520D, como "Ver menú"), contador blanco sobre naranja.
 - Domicilio $5.000 (en `src/config.ts`, una vez por pedido, no por ítem):
   drawer muestra Subtotal / Domicilio / Total y el mensaje de WhatsApp incluye las 3 líneas.
-- Checkout (CartDrawer): pago `Efectivo` o `Bre-B`. Si es Bre-B, el mensaje de WhatsApp
-  incluye el QR `${origin}/img/bree/Bree.jpg` (existe en `public/img/bree/Bree.jpg`) y
-  pide enviar soporte al celular del cliente. Form responsive: grids 1 col en móvil,
-  2 cols desde `sm`; inputs/select con `min-w-0`, teléfono con `inputmode="numeric"`.
+- Checkout (CartDrawer): pago `Efectivo` o `Bre-B` (el flujo actual en disco envía el QR
+  Bre-B al WhatsApp del cliente; confirmar intención). Form responsive: grids 1 col en
+  móvil, 2 cols desde `sm`; inputs/select con `min-w-0`, teléfono `inputmode="numeric"`.
+- Al iniciar la app se limpia el carrito (`localStorage` + render vacío). Móvil: hero con
+  `clamp()` y `overflow-x: clip` en `html/body` para evitar desborde (validado 320/390/430,
+  sin overflow ni errores de consola, 2026-11-09).
 - Burger: `explosion-de-barril.jpg` 720x959, 152 KB. Logo: `smoky-logo.jpg` 600x494, 62 KB.
   SVG originales en `public/` sin usar (2,7 MB en dist): decidir si borrarlos.
 - Instagram @smoky_burgercartago. WhatsApp +57 320 849 7584.

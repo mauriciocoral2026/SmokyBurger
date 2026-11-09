@@ -234,5 +234,7 @@
     form.reset();
   });
 
-  render();
+  // Limpiar carrito al iniciar la aplicación
+  localStorage.removeItem(KEY);
+  render([]);
 </script>
