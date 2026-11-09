@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import { productos, getProducto, formatCOP } from '../../data/menu';
+import { whatsappLink } from '../../config';
+
+export function getStaticPaths() {
+  return productos.map((p) => ({ params: { slug: p.slug }, props: { producto: p } }));
+}
+const { producto } = Astro.props as { producto: (typeof productos)[0] };
+const p = producto ?? getProducto(Astro.params.slug!);
+if (!p) throw new Error('Producto no encontrado: ' + Astro.params.slug);
+---
+<Base title={p.nombre} description={p.descripcion} image={p.foto}>
+  <section class="mx-auto max-w-5xl px-4 py-8 sm:px-6">
+    <div class="overflow-hidden rounded-2xl bg-white shadow-xl">
+      <div class="grid md:grid-cols-[45%_55%]">
+        <div class="relative bg-white p-6">
+          <img src={p.foto} alt={p.nombre} class="h-full w-full object-contain" />
+        </div>
+        <div class="flex max-h-[80vh] flex-col">
+          <div class="flex items-start justify-between border-b border-gray-100 p-6">
+            <div class="flex-1 pr-4">
+              <h1 class="text-2xl font-bold text-black">{p.nombre.replace(' — Smoky Burger', '')}</h1>
+              <p class="mt-2 text-sm text-gray-600">{p.descripcion}</p>
+            </div>
+            <a href="/menu" class="text-gray-400 hover:text-gray-600">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </a>
+          </div>
+          <div class="flex-1 overflow-y-auto p-6">
+            <h2 class="mb-3 text-sm font-semibold text-black">Ingredientes</h2>
+            <ul class="space-y-2">
+              {p.ingredientes.map((ing) => (
+                <li class="flex items-center gap-2 text-sm text-gray-600">
+                  <span class="h-1.5 w-1.5 rounded-full bg-gray-400"></span>
+                  {ing}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="border-t border-gray-100 p-6">
+            <div class="flex items-center gap-4">
+              <div class="flex items-center rounded-lg border border-gray-300">
+                <button id="qty-dec" type="button" class="px-3 py-2 text-gray-600 hover:bg-gray-100">-</button>
+                <span id="qty" class="px-4 py-2 text-sm font-medium">1</span>
+                <button id="qty-inc" type="button" class="px-3 py-2 text-gray-600 hover:bg-gray-100">+</button>
+              </div>
+              <button id="add-btn" type="button" class="flex flex-1 items-center justify-between rounded-lg bg-[#ff520d] px-6 py-3 text-white hover:bg-[#e0480b]">
+                <span class="font-bold">Agregar</span>
+                <span id="total-price" class="font-bold">{formatCOP(p.precio)}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script define:vars={{ precio: p.precio, productId: p.id }}>
+    let qty = 1;
+    const qtyEl = document.getElementById('qty');
+    const totalEl = document.getElementById('total-price');
+    const dec = document.getElementById('qty-dec');
+    const inc = document.getElementById('qty-inc');
+    const addBtn = document.getElementById('add-btn');
+    
+    function update() {
+      if (qtyEl) qtyEl.textContent = qty;
+      if (totalEl) totalEl.textContent = '$' + (precio * qty).toLocaleString('es-CO');
+    }
+    
+    dec?.addEventListener('click', () => {
+      if (qty > 1) {
+        qty--;
+        update();
+      }
+    });
+    
+    inc?.addEventListener('click', () => {
+      qty++;
+      update();
+    });
+    
+    addBtn?.addEventListener('click', () => {
+      for (let i = 0; i < qty; i++) {
+        document.dispatchEvent(new CustomEvent('smoky-add', { detail: { id: productId } }));
+      }
+      setTimeout(() => {
+        document.getElementById('cart-open')?.click();
+      }, 100);
+    });
+  </script>
+</Base>

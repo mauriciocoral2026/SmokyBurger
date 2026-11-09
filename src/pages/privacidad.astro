@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { config } from '../config';
+---
+<Base title="Política de privacidad">
+  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <h1 class="font-display text-3xl uppercase text-ink">Política de privacidad</h1>
+    <div class="mt-6 space-y-4 text-sm leading-relaxed text-ink/70">
+      <p>Recopilamos solo los datos necesarios para procesar tu pedido: nombre, teléfono, dirección y notas.</p>
+      <p>El carrito se guarda localmente en tu navegador (localStorage), no en servidores.</p>
+      <p>Consulta: {config.email} · WhatsApp {config.whatsappDisplay}</p>
+      <p>Placeholder MVP — reemplaza con tu política legal antes de publicar.</p>
+    </div>
+  </section>
+</Base>

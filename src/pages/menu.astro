@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { productos, categorias } from '../data/menu';
+---
+<Base title="Menú" description="Menú SmokyBurger: burgers ahumadas al barril. Pide online y paga por WhatsApp.">
+  <section class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold text-ink sm:text-4xl">Menú</h1>
+    <p class="mt-2 text-smoke">Burgers ahumadas al barril</p>
+
+    <div class="sticky top-16 z-30 mt-6 -mx-4 border-y border-black/10 bg-[#ebe5d9]/95 px-4 py-2 backdrop-blur sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+      <nav class="no-scrollbar flex gap-2 overflow-x-auto">
+        {categorias.map((c) => (
+          <a href={`#${c.toLowerCase().replace(/\s+/g, '-')}`} class="whitespace-nowrap rounded-full border border-black/10 bg-white px-4 py-1.5 text-sm hover:border-ember hover:text-ember">
+            {c}
+          </a>
+        ))}
+      </nav>
+    </div>
+
+    {categorias.map((cat) => {
+      const items = productos.filter((p) => p.categoria === cat);
+      return (
+        <section id={cat.toLowerCase().replace(/\s+/g, '-')} class="mt-10 scroll-mt-32">
+          <h2 class="text-xl font-bold text-ink">{cat}</h2>
+          <div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {items.map((p) => <ProductCard producto={p} />)}
+          </div>
+        </section>
+      );
+    })}
+  </section>
+</Base>
