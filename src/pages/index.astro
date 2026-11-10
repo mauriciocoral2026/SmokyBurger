@@ -2,16 +2,15 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import { productos } from '../data/menu';
-import { config } from '../config';
 
-const hero = productos[0];
-const heroImg = hero?.foto || '/img/burgers/explosion-de-barril.svg';
-const heroW = hero?.fotoW || 896;
-const heroH = hero?.fotoH || 1194;
+const hero = productos.find((p) => p.slug === 'alma-de-barrica') ?? productos[0];
+const heroImg = hero?.foto || '/img/burgers/alma-barrica.jpg';
+const heroW = hero?.fotoW || 1792;
+const heroH = hero?.fotoH || 1983;
 ---
 <Base>
-  <section class="relative flex min-h-screen items-center justify-center overflow-hidden">
-    <div class="absolute inset-0">
+  <section class="relative flex min-h-[100svh] w-full max-w-full items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 w-full overflow-hidden">
       <Image
         src={heroImg}
         alt=""
@@ -20,9 +19,21 @@ const heroH = hero?.fotoH || 1194;
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="h-full w-full object-cover object-center"
+        class="hero-bg hero-fallback absolute inset-0 block h-full w-full object-cover object-center md:object-center"
       />
-      <div class="absolute inset-0 bg-black/70"></div>
+      <video
+        class="hero-video absolute inset-0 hidden h-full w-full object-cover object-center md:block"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster={heroImg}
+        aria-hidden="true"
+      >
+        <source src="/img/burgers/video-barril.mp4" type="video/mp4" />
+      </video>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75"></div>
     </div>
     <div class="relative mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
       <div class="mb-8">
@@ -47,3 +58,45 @@ const heroH = hero?.fotoH || 1194;
     </div>
   </section>
 </Base>
+
+<style>
+  .hero-bg {
+    --zoom-from: 1;
+    --zoom-to: 1;
+    transform: scale(1);
+    transform-origin: center center;
+    animation: none;
+    will-change: transform;
+    max-width: none;
+  }
+
+  @keyframes hero-zoom {
+    from {
+      transform: scale(var(--zoom-from));
+    }
+    to {
+      transform: scale(var(--zoom-to));
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero-fallback {
+      --zoom-from: 1.03;
+      --zoom-to: 1.08;
+      transform: scale(var(--zoom-from));
+      animation: hero-zoom 18s ease-in-out infinite alternate;
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-fallback {
+      display: block !important;
+      animation: none;
+      transform: scale(1);
+    }
+    .hero-video {
+      display: none !important;
+    }
+  }
+</style>
