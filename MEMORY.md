@@ -6,7 +6,7 @@
 - Header: nav desktop (`md:flex`) + menú móvil hamburguesa con enlaces Inicio, Pedir, Ubicación y Paga aquí (`src/components/Header.astro`), verificado en 390px (toggle/selección, consola limpia, 2026-11-10).
 - Botón carrito naranja (#FF520D), contador blanco sobre naranja.
 - Domicilio $5.000 (en `src/config.ts`, una vez por pedido): drawer muestra Subtotal / Domicilio / Total y WhatsApp incluye las 3 líneas.
-- Checkout (CartDrawer): pago `Efectivo` o `Bre-B` (flujo actual envía QR Bre-B al WhatsApp del cliente; confirmar intención). Form responsive (1 col móvil, 2 cols desde `sm`).
+- Checkout (CartDrawer): pago `Efectivo` o `Bre-B` (flujo actual envía QR Bre-B al WhatsApp del cliente; confirmar intención). Form responsive (1 col móvil, 2 cols desde `sm`); inputs/select/textarea con `text-base md:text-sm` para evitar zoom en iOS.
 - Al iniciar se limpia el carrito. Móvil: hero con `clamp()` y `overflow-x: clip` en `html/body`.
 - Burger: `explosion-de-barril.jpg` 720x959, 152 KB. Logo: `smoky-logo.jpg` 600x494, 62 KB. SVG originales en `public/` sin usar: decidir si borrarlos.
 - Instagram @smoky_burgercartago. WhatsApp +57 320 849 7584. Horario/ubicación en `src/config.ts` (revisar coherencia).
@@ -23,4 +23,5 @@
 ## Errores a evitar
 - No volver a `object-contain` con padding en tarjeta/héroe: la foto a color deja bandas laterales.
 - No usar nombres `logo.svg` en `public/`: el dev server devolvía 404. Usar `smoky-logo.jpg`.
+- No poner inputs del formulario con fuente < 16px en móvil: provoca zoom automático en iOS al enfocar.
 - No guardar datos sensibles en el repo.

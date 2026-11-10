@@ -1,6 +1,6 @@
 export const config = {
   brand: 'SmokyBurger',
-  tagline: 'Burger ahumadas en barril',
+  tagline: 'Burger ahumadas al barril',
   description:
     'SmokyBurger — burger ahumadas al barril, pide online, despacho a domicilio rápido y caliente.',
   /** Número de WhatsApp en formato internacional, solo dígitos: 57 + tu número */

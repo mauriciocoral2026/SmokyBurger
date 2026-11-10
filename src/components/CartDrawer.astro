@@ -17,18 +17,18 @@
 
   <form id="checkout-form" class="space-y-3 border-t bg-cream/60 p-4">
     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-      <input required name="nombre" placeholder="Nombre" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-sm" />
-      <input required name="telefono" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Celular (10 dígitos)" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-sm" />
+      <input required name="nombre" placeholder="Nombre" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-base md:text-sm" />
+      <input required name="telefono" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Celular (10 dígitos)" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-base md:text-sm" />
     </div>
-    <input required name="direccion" placeholder="Dirección de entrega" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-sm" />
+    <input required name="direccion" placeholder="Dirección de entrega" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-base md:text-sm" />
     <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-      <input name="barrio" placeholder="Barrio / zona" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-sm" />
-      <select name="pago" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2.5 text-sm">
+      <input name="barrio" placeholder="Barrio / zona" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2 text-base md:text-sm" />
+      <select name="pago" class="w-full min-w-0 rounded-xl border border-black/15 bg-white px-3 py-2.5 text-base md:text-sm">
         <option value="Efectivo">Efectivo</option>
         <option value="Bre-B">Bre-B</option>
       </select>
     </div>
-    <textarea name="notas" placeholder="Notas" rows="2" class="w-full rounded-xl border border-black/15 bg-white px-3 py-2 text-sm"></textarea>
+    <textarea name="notas" placeholder="Notas" rows="2" class="w-full rounded-xl border border-black/15 bg-white px-3 py-2 text-base md:text-sm"></textarea>
 
     <div class="flex items-center justify-between pt-1">
       <span class="text-sm text-smoke">Subtotal</span>
