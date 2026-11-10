@@ -18,8 +18,23 @@ const isActive = (path: string) => currentPath === path;
     </nav>
 
     <button
+      id="menu-open"
+      class="ml-auto inline-flex items-center justify-center rounded-md p-2 text-ink hover:text-ember md:hidden"
+      type="button"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="4" x2="20" y1="6" y2="6"></line>
+        <line x1="4" x2="20" y1="12" y2="12"></line>
+        <line x1="4" x2="20" y1="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <button
       id="cart-open"
-      class="ml-auto inline-flex items-center gap-2 rounded-full bg-ember px-4 py-2 text-sm font-medium text-white hover:bg-ember-dark disabled:cursor-not-allowed disabled:opacity-50"
+      class="inline-flex items-center gap-2 rounded-full bg-ember px-4 py-2 text-sm font-medium text-white hover:bg-ember-dark disabled:cursor-not-allowed disabled:opacity-50 md:ml-auto"
       type="button"
       aria-label="Abrir carrito"
       disabled
@@ -34,4 +49,33 @@ const isActive = (path: string) => currentPath === path;
       <span id="cart-count" class="hidden min-w-5 rounded-full bg-white px-1.5 text-xs font-bold text-ember">0</span>
     </button>
   </div>
+
+  <nav id="mobile-menu" class="hidden border-t border-black/10 bg-[#ebe5d9] md:hidden">
+    <div class="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 text-sm sm:px-6 lg:px-8">
+      <a href="/" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/') && 'font-medium']}>Inicio</a>
+      <a href="/menu" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/menu') && 'font-medium']}>Pedir</a>
+      <a href="/ubicacion" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/ubicacion') && 'font-medium']}>Ubicación</a>
+      <a href="/paga-aqui" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', (isActive('/paga-aqui') || isActive('/paga-aqui/')) && 'font-medium']}>Paga aquí</a>
+    </div>
+  </nav>
 </header>
+
+<script>
+  const menuButton = document.getElementById('menu-open');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (menuButton && mobileMenu) {
+    menuButton.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden', isOpen);
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+    });
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Abrir menú');
+      });
+    });
+  }
+</script>
