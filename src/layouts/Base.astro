@@ -13,7 +13,7 @@ interface Props {
 const { title, description, image } = Astro.props;
 const pageTitle = title ? `${title} | ${config.brand}` : `${config.brand} | ${config.tagline}`;
 const pageDesc = description || config.description;
-const pageImage = image || `${config.baseUrl}/img/burgers/explosion-de-barril.svg`;
+const pageImage = image || `${config.baseUrl}/img/burgers/explosion-de-barril.jpg`;
 const canonical = new URL(Astro.url.pathname, config.baseUrl).toString();
 
 const jsonLd = {
