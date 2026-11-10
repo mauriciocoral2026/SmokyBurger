@@ -19,10 +19,10 @@ const heroH = hero?.fotoH || 1983;
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="hero-bg hero-fallback absolute inset-0 block h-full w-full object-cover object-center md:object-center"
+        class="hero-bg hero-fallback absolute inset-0 hidden h-full w-full object-cover object-center"
       />
       <video
-        class="hero-video absolute inset-0 hidden h-full w-full object-cover object-center md:block"
+        class="hero-video absolute inset-0 block h-full w-full object-cover object-center"
         autoplay
         muted
         loop
@@ -76,16 +76,6 @@ const heroH = hero?.fotoH || 1983;
     }
     to {
       transform: scale(var(--zoom-to));
-    }
-  }
-
-  @media (min-width: 768px) {
-    .hero-fallback {
-      --zoom-from: 1.03;
-      --zoom-to: 1.08;
-      transform: scale(var(--zoom-from));
-      animation: hero-zoom 18s ease-in-out infinite alternate;
-      display: none;
     }
   }
 
