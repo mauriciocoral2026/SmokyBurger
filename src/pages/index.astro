@@ -19,23 +19,41 @@ const heroH = hero?.fotoH || 1983;
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="hero-bg hero-fallback absolute inset-0 hidden h-full w-full object-cover object-center"
+        class="hero-bg hero-fallback absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-100 transition-opacity duration-[1500ms] ease-in-out"
       />
       <video
-        class="hero-video absolute inset-0 block h-full w-full object-cover object-center"
-        autoplay
+        class="hero-video absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-0 transition-opacity duration-[1500ms] ease-in-out"
         muted
         loop
         playsinline
-        preload="metadata"
+        preload="auto"
         poster={heroImg}
         aria-hidden="true"
       >
         <source src="/img/burgers/video-barril.mp4" type="video/mp4" />
       </video>
-      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75"></div>
+      <div class="absolute inset-0 z-[2] bg-gradient-to-b from-black/70 via-black/55 to-black/75"></div>
     </div>
-    <div class="relative mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
+    <script>
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const showHeroVideo = () => {
+        if (reduceMotion.matches) return;
+        const video = document.querySelector('.hero-video');
+        const fallback = document.querySelector('.hero-fallback');
+        if (!(video instanceof HTMLVideoElement) || !(fallback instanceof HTMLElement)) return;
+        video.currentTime = 0;
+        const playPromise = video.play();
+        if (playPromise) playPromise.catch(() => {});
+        video.classList.remove('opacity-0');
+        video.classList.add('opacity-100');
+        fallback.classList.remove('opacity-100');
+        fallback.classList.add('opacity-0');
+      };
+      if (!reduceMotion.matches) {
+        window.setTimeout(showHeroVideo, 6000);
+      }
+    </script>
+    <div class="relative z-[3] mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
       <div class="mb-8">
         <span class="inline-block rounded-full border border-[#ff520d] bg-black/40 px-6 py-2 text-xs font-light uppercase tracking-[0.3em] text-[#ff520d]">
           BIENVENIDOS
@@ -61,11 +79,11 @@ const heroH = hero?.fotoH || 1983;
 
 <style>
   .hero-bg {
-    --zoom-from: 1;
+    --zoom-from: 1.08;
     --zoom-to: 1;
-    transform: scale(1);
+    transform: scale(var(--zoom-from));
     transform-origin: center center;
-    animation: none;
+    animation: hero-zoom 6s linear forwards;
     will-change: transform;
     max-width: none;
   }
@@ -82,6 +100,7 @@ const heroH = hero?.fotoH || 1983;
   @media (prefers-reduced-motion: reduce) {
     .hero-fallback {
       display: block !important;
+      opacity: 1 !important;
       animation: none;
       transform: scale(1);
     }
