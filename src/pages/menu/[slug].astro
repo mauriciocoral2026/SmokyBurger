@@ -20,7 +20,7 @@ const badge = p.popular ? 'Recomendada' : (p.badge ?? '🔥 ESPECIALIDAD AL BARR
 
     <div class="overflow-hidden rounded-2xl border border-white/10 bg-[#161616] shadow-2xl md:rounded-3xl">
       <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="relative h-72 bg-[#0D0D0D] sm:h-96 md:h-full md:min-h-[560px]">
+        <div class="flex items-center justify-center bg-[#0B0B0B] p-4 md:p-6">
           <Image
             src={p.foto}
             alt={p.nombre}
@@ -28,9 +28,8 @@ const badge = p.popular ? 'Recomendada' : (p.badge ?? '🔥 ESPECIALIDAD AL BARR
             height={p.fotoH}
             loading="eager"
             decoding="async"
-            class="h-full w-full object-cover"
+            class="h-auto w-full max-h-[50vh] rounded-xl object-contain md:max-h-[65vh]"
           />
-          <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#161616] to-transparent md:hidden"></div>
         </div>
 
         <div class="flex flex-col p-5 sm:p-7 md:p-8">
@@ -51,14 +50,14 @@ const badge = p.popular ? 'Recomendada' : (p.badge ?? '🔥 ESPECIALIDAD AL BARR
             <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div class="flex items-center gap-4">
                 <div class="flex items-center rounded-xl border border-white/10 bg-[#1A1A1A]">
-                  <button id="qty-dec" type="button" class="px-3 py-2 text-[#F5F5F5] transition-colors hover:text-[#FF5500]">-</button>
+                  <button id="qty-dec" type="button" class="cursor-pointer px-3 py-2 text-[#F5F5F5] transition-all hover:text-[#FF5500] active:scale-95">-</button>
                   <span id="qty" class="min-w-10 px-3 py-2 text-center text-sm font-semibold text-[#F5F5F5]">1</span>
-                  <button id="qty-inc" type="button" class="px-3 py-2 text-[#F5F5F5] transition-colors hover:text-[#FF5500]">+</button>
+                  <button id="qty-inc" type="button" class="cursor-pointer px-3 py-2 text-[#F5F5F5] transition-all hover:text-[#FF5500] active:scale-95">+</button>
                 </div>
                 <span class="text-lg font-bold text-[#F5F5F5] sm:hidden">{formatCOP(p.precio)}</span>
               </div>
 
-              <button id="add-btn" type="button" class="flex w-full items-center justify-between gap-4 rounded-xl bg-[#FF5500] px-5 py-3 text-white shadow-lg shadow-orange-600/30 transition-colors hover:bg-[#E04800] sm:w-auto sm:min-w-[240px]">
+              <button id="add-btn" type="button" class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-xl bg-[#FF5500] px-5 py-3 text-white shadow-lg shadow-orange-600/30 transition-all hover:bg-[#E04800] active:scale-95 sm:w-auto sm:min-w-[240px]">
                 <span class="font-bold">Agregar al pedido</span>
                 <span id="total-price" class="font-bold">{formatCOP(p.precio)}</span>
               </button>

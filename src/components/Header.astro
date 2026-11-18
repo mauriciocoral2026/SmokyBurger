@@ -19,7 +19,7 @@ const isActive = (path: string) => currentPath === path;
 
     <button
       id="menu-open"
-      class="ml-auto inline-flex items-center justify-center rounded-md p-2 text-[#F5F5F5] transition-colors hover:text-[#FF5500] md:hidden"
+      class="ml-auto inline-flex cursor-pointer items-center justify-center rounded-md p-2 text-[#F5F5F5] transition-all hover:text-[#FF5500] active:scale-95 md:hidden"
       type="button"
       aria-label="Abrir menú"
       aria-expanded="false"
@@ -34,7 +34,7 @@ const isActive = (path: string) => currentPath === path;
 
     <button
       id="cart-open"
-      class="inline-flex items-center gap-2 rounded-full border border-[#FF5500]/70 bg-[#FF5500] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,85,0,0.25),0_8px_24px_rgba(255,85,0,0.2)] transition-colors hover:border-[#FF5500] hover:bg-[#E04800] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none md:ml-auto"
+      class="inline-flex cursor-pointer items-center gap-2 rounded-full border border-[#FF5500]/70 bg-[#FF5500] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,85,0,0.25),0_8px_24px_rgba(255,85,0,0.2)] transition-all hover:border-[#FF5500] hover:bg-[#E04800] active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none md:ml-auto"
       type="button"
       aria-label="Abrir carrito"
       disabled
