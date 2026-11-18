@@ -9,7 +9,7 @@
 - Checkout (CartDrawer): pago `Efectivo` o `Bre-B` (flujo actual envía QR Bre-B al WhatsApp del cliente; confirmar intención). Form responsive (1 col móvil, 2 cols desde `sm`); inputs/select/textarea con `text-base md:text-sm` para evitar zoom en iOS.
 - Al iniciar se limpia el carrito. Móvil: hero con `clamp()` y `overflow-x: clip` en `html/body`.
 - Burgers: `explosion-de-barril.jpg` (1792x2291, ~828 KB) y `alma-barrica.jpg` (1792x1983, ~572 KB) en `public/img/burgers/` (Gaucha usa la foto de Explosión; home usa la de Alma de Barrica). Logo: `smoky-logo.jpg` 600x494, 62 KB. SVG originales en `public/` sin usar: decidir si borrarlos.
-- Hero home (`src/pages/index.astro`): muestra la imagen de hamburguesa 6s con efecto de reducción de tamaño (scale 1.08→1) y luego hace crossfade (1.5s) al video `video-barril.mp4` (`public/img/burgers/`, ~3.2 MB, muted/loop/playsinline, preload auto); contenido del hero sobre el overlay (`z-[3]`); con `prefers-reduced-motion: reduce` queda solo la imagen estática. `dist/img/burgers/video-barril.mov` (~11 MB) existe pero no se usa en web.
+- Hero home (`src/pages/index.astro`): muestra la imagen de hamburguesa 10s con efecto de reducción de tamaño (scale 1.08→1) y luego hace crossfade (1.5s) al video `video-barril.mp4` (`public/img/burgers/`, ~6.6 MB, muted/loop/playsinline, preload auto); contenido del hero sobre el overlay (`z-[3]`); con `prefers-reduced-motion: reduce` queda solo la imagen estática. `dist/img/burgers/video-barril.mov` (~11 MB) existe pero no se usa en web.
 - Instagram @smoky_burgercartago. WhatsApp +57 320 849 7584. Horario/ubicación en `src/config.ts` (revisar coherencia).
 - 3 burgers: Explosión de Barril, Alma de Barrica, Gaucha.
 - `opencode.json` tiene MCP `chrome-devtools`; requiere Chrome/entorno que permita lanzar/conectar para pruebas automáticas. Validar en navegador el flujo Bre-B → QR en WhatsApp.
@@ -21,7 +21,7 @@
 - Imágenes: se extrajo el JPEG embebido en el SVG y se optimizó (de 2,36 MB a 152 KB).
 - Domicilio fijo $2.000 por pedido. Consu: no aplica gratis ni por distancia (pendiente ajustar si hace falta).
 - Línea secundaria del héroe ajustada a "Ahumado en barril, siempre" para no contradecir el nuevo claim.
-- Héroe: imagen 6s y luego transición a video `video-barril.mp4` en todos los dispositivos; fallback solo con `prefers-reduced-motion: reduce` (ajuste 2026-11-18). Recurso existente (sin `.webm`); evaluar peso/LCP en datos móviles si hace falta.
+- Héroe: imagen 10s y luego transición a video `video-barril.mp4` en todos los dispositivos; fallback solo con `prefers-reduced-motion: reduce` (ajuste 2026-11-18). Recurso existente (sin `.webm`); evaluar peso/LCP en datos móviles si hace falta.
 
 ## Errores a evitar
 - No volver a `object-contain` con padding en tarjeta/héroe: la foto a color deja bandas laterales.

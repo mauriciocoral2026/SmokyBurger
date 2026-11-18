@@ -50,7 +50,7 @@ const heroH = hero?.fotoH || 1983;
         fallback.classList.add('opacity-0');
       };
       if (!reduceMotion.matches) {
-        window.setTimeout(showHeroVideo, 6000);
+        window.setTimeout(showHeroVideo, 10000);
       }
     </script>
     <div class="relative z-[3] mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ const heroH = hero?.fotoH || 1983;
     --zoom-to: 1;
     transform: scale(var(--zoom-from));
     transform-origin: center center;
-    animation: hero-zoom 6s linear forwards;
+    animation: hero-zoom 10s linear forwards;
     will-change: transform;
     max-width: none;
   }
