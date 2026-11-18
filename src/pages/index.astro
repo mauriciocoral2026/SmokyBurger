@@ -7,6 +7,7 @@ const hero = productos.find((p) => p.slug === 'alma-de-barrica') ?? productos[0]
 const heroImg = hero?.foto || '/img/burgers/alma-barrica.jpg';
 const heroW = hero?.fotoW || 1792;
 const heroH = hero?.fotoH || 1983;
+const heroVideos = ['/img/burgers/video-barril.mp4'];
 ---
 <Base>
   <section class="relative flex min-h-[100svh] w-full max-w-full items-center justify-center overflow-hidden">
@@ -19,38 +20,76 @@ const heroH = hero?.fotoH || 1983;
         loading="eager"
         fetchpriority="high"
         decoding="async"
-        class="hero-bg hero-fallback absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-100 transition-opacity duration-[1500ms] ease-in-out drop-shadow-[0_0_36px_rgba(255,85,0,0.22)]"
+        class="hero-bg hero-fallback absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-100 transition-opacity duration-1000 ease-in-out drop-shadow-[0_0_36px_rgba(255,85,0,0.22)]"
       />
       <video
-        class="hero-video absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-0 transition-opacity duration-[1500ms] ease-in-out"
+        class="hero-video pointer-events-none absolute inset-0 z-[1] h-full w-full object-cover object-center opacity-0 transition-opacity duration-1000 ease-in-out"
         muted
-        loop
         playsinline
-        preload="auto"
+        preload="none"
         poster={heroImg}
         aria-hidden="true"
-      >
-        <source src="/img/burgers/video-barril.mp4" type="video/mp4" />
-      </video>
+        data-videos={JSON.stringify(heroVideos)}
+      ></video>
       <div class="absolute inset-0 z-[2] bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/60 to-[#0D0D0D]/80"></div>
     </div>
     <script>
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-      const showHeroVideo = () => {
-        if (reduceMotion.matches) return;
-        const video = document.querySelector('.hero-video');
-        const fallback = document.querySelector('.hero-fallback');
-        if (!(video instanceof HTMLVideoElement) || !(fallback instanceof HTMLElement)) return;
-        video.currentTime = 0;
-        const playPromise = video.play();
-        if (playPromise) playPromise.catch(() => {});
-        video.classList.remove('opacity-0');
-        video.classList.add('opacity-100');
-        fallback.classList.remove('opacity-100');
-        fallback.classList.add('opacity-0');
-      };
-      if (!reduceMotion.matches) {
-        window.setTimeout(showHeroVideo, 10000);
+      const video = document.querySelector('.hero-video');
+      const fallback = document.querySelector('.hero-fallback');
+
+      if (!reduceMotion.matches && video instanceof HTMLVideoElement && fallback instanceof HTMLElement) {
+        let videos = ['/img/burgers/video-barril.mp4'];
+        try {
+          const parsed = JSON.parse(video.dataset.videos || '[]');
+          if (Array.isArray(parsed) && parsed.filter(Boolean).length) {
+            videos = parsed.filter((v) => typeof v === 'string' && v);
+          }
+        } catch {}
+
+        let lastIndex = -1;
+        const pickVideoIndex = () => {
+          if (videos.length === 1) {
+            lastIndex = 0;
+            return 0;
+          }
+          let idx = Math.floor(Math.random() * videos.length);
+          if (idx === lastIndex) idx = (idx + 1) % videos.length;
+          lastIndex = idx;
+          return idx;
+        };
+
+        const showImage = () => {
+          fallback.classList.remove('opacity-0');
+          fallback.classList.add('opacity-100');
+          video.classList.remove('opacity-100');
+          video.classList.add('opacity-0', 'pointer-events-none');
+          video.pause();
+          window.setTimeout(showVideo, 10000);
+        };
+
+        const showVideo = async () => {
+          const idx = pickVideoIndex();
+          if (video.getAttribute('src') !== videos[idx]) {
+            video.src = videos[idx];
+          }
+          try {
+            video.currentTime = 0;
+          } catch {}
+          try {
+            await video.play();
+          } catch {
+            window.setTimeout(showVideo, 10000);
+            return;
+          }
+          video.classList.remove('opacity-0', 'pointer-events-none');
+          video.classList.add('opacity-100');
+          fallback.classList.remove('opacity-100');
+          fallback.classList.add('opacity-0');
+          window.setTimeout(showImage, 5000);
+        };
+
+        window.setTimeout(showVideo, 10000);
       }
     </script>
     <div class="relative z-[3] mx-auto max-w-6xl px-4 text-center sm:px-6 lg:px-8">

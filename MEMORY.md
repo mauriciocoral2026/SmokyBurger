@@ -13,7 +13,7 @@
 - Domicilio $5.000 (`src/config.ts`): drawer muestra Subtotal/Domicilio/Total y WhatsApp incluye las 3 líneas. Checkout responsive; inputs/select/textarea `text-base md:text-sm`.
 - Al iniciar se limpia el carrito. Móvil: hero con `clamp()` y `overflow-x: clip` en `html/body`.
 - Burgers: `explosion-de-barril.jpg` (1792x2291, ~828 KB) y `alma-barrica.jpg` (1792x1983, ~572 KB) en `public/img/burgers/` (Gaucha usa la foto de Explosión; home usa la de Alma de Barrica). Logo: `smoky-logo.jpg` 600x494, 62 KB. SVG originales en `public/` sin usar: decidir si borrarlos.
-- Hero home (`src/pages/index.astro`, PASO 2 corregido 2026-11-18): conserva video `video-barril.mp4`, transición imagen→video y animación `hero-zoom`; overlay `bg-gradient-to-t from-[#0D0D0D] via-[#0D0D0D]/60 to-[#0D0D0D]/80`, badge "AHUMADAS AL BARRIL • AFUERA DE NEW PEOPLE", "HUMO" en `#FF5500`, botón "PEDIR AHORA".
+- Hero home (`src/pages/index.astro`): ciclo automático crossfade `transition-opacity duration-1000` (10s imagen → 5s video aleatorio → 10s imagen) con array `heroVideos` (hoy `video-barril.mp4`, sin repetir seguido si hay más). Video `muted playsinline preload="none"`, pausado/oculto al inicio; conserva contenedores/estilos/scripts y animación `hero-zoom` de la imagen. Overlay, badge "AHUMADAS AL BARRIL • AFUERA DE NEW PEOPLE", "HUMO" en `#FF5500`, botón "PEDIR AHORA".
 - Instagram @smoky_burgercartago. WhatsApp +57 320 849 7584. Horario/ubicación en `src/config.ts` (revisar coherencia). 3 burgers: Explosión de Barril, Alma de Barrica, Gaucha.
 - `opencode.json` tiene MCP `chrome-devtools`. Postman CLI 1.76.0 inicializado (2026-11-10), workspace no vinculado (`workspace.id` vacío). Validar en navegador el flujo Bre-B → QR en WhatsApp.
 
