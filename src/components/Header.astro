@@ -4,22 +4,22 @@ import { config } from '../config';
 const { currentPath = '/' } = Astro.props;
 const isActive = (path: string) => currentPath === path;
 ---
-<header class="sticky top-0 z-40 border-b border-black/10 bg-[#ebe5d9]">
+<header class="sticky top-0 z-50 border-b border-[#2A2A2A]/80 bg-[#0D0D0D]/70 backdrop-blur-md">
   <div class="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
     <a href="/" class="flex items-center gap-2">
-      <span class="text-lg font-bold tracking-tight text-ink">{config.brand}</span>
+      <span class="font-display text-xl font-semibold tracking-wide text-[#F5F5F5]">{config.brand}</span>
     </a>
 
     <nav class="ml-6 hidden items-center gap-6 text-sm md:flex">
-      <a href="/" class:list={['text-ink hover:text-ember', isActive('/') && 'font-medium']}>Inicio</a>
-      <a href="/menu" class:list={['text-ink hover:text-ember', isActive('/menu') && 'font-medium']}>Pedir</a>
-      <a href="/ubicacion" class:list={['text-ink hover:text-ember', isActive('/ubicacion') && 'font-medium']}>Ubicación</a>
-      <a href="/paga-aqui" class:list={['text-ink hover:text-ember', (isActive('/paga-aqui') || isActive('/paga-aqui/')) && 'font-medium']}>Paga aquí</a>
+      <a href="/" class:list={['transition-colors hover:text-[#FF5500]', isActive('/') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Inicio</a>
+      <a href="/menu" class:list={['transition-colors hover:text-[#FF5500]', isActive('/menu') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Pedir</a>
+      <a href="/ubicacion" class:list={['transition-colors hover:text-[#FF5500]', isActive('/ubicacion') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Ubicación</a>
+      <a href="/paga-aqui" class:list={['transition-colors hover:text-[#FF5500]', (isActive('/paga-aqui') || isActive('/paga-aqui/')) ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Paga aquí</a>
     </nav>
 
     <button
       id="menu-open"
-      class="ml-auto inline-flex items-center justify-center rounded-md p-2 text-ink hover:text-ember md:hidden"
+      class="ml-auto inline-flex items-center justify-center rounded-md p-2 text-[#F5F5F5] transition-colors hover:text-[#FF5500] md:hidden"
       type="button"
       aria-label="Abrir menú"
       aria-expanded="false"
@@ -34,7 +34,7 @@ const isActive = (path: string) => currentPath === path;
 
     <button
       id="cart-open"
-      class="inline-flex items-center gap-2 rounded-full bg-ember px-4 py-2 text-sm font-medium text-white hover:bg-ember-dark disabled:cursor-not-allowed disabled:opacity-50 md:ml-auto"
+      class="inline-flex items-center gap-2 rounded-full border border-[#FF5500]/70 bg-[#FF5500] px-4 py-2 text-sm font-semibold text-white shadow-[0_0_0_1px_rgba(255,85,0,0.25),0_8px_24px_rgba(255,85,0,0.2)] transition-colors hover:border-[#FF5500] hover:bg-[#E04800] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none md:ml-auto"
       type="button"
       aria-label="Abrir carrito"
       disabled
@@ -46,16 +46,16 @@ const isActive = (path: string) => currentPath === path;
         <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path>
       </svg>
       <span>Carrito</span>
-      <span id="cart-count" class="hidden min-w-5 rounded-full bg-white px-1.5 text-xs font-bold text-ember">0</span>
+      <span id="cart-count" class="hidden min-w-5 rounded-full bg-[#F5F5F5] px-1.5 text-xs font-bold text-[#FF5500]">0</span>
     </button>
   </div>
 
-  <nav id="mobile-menu" class="hidden border-t border-black/10 bg-[#ebe5d9] md:hidden">
+  <nav id="mobile-menu" class="hidden border-t border-[#2A2A2A]/80 bg-[#0D0D0D]/95 backdrop-blur-md md:hidden">
     <div class="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-3 text-sm sm:px-6 lg:px-8">
-      <a href="/" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/') && 'font-medium']}>Inicio</a>
-      <a href="/menu" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/menu') && 'font-medium']}>Pedir</a>
-      <a href="/ubicacion" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', isActive('/ubicacion') && 'font-medium']}>Ubicación</a>
-      <a href="/paga-aqui" class:list={['rounded-md px-3 py-2 text-ink hover:bg-black/5 hover:text-ember', (isActive('/paga-aqui') || isActive('/paga-aqui/')) && 'font-medium']}>Paga aquí</a>
+      <a href="/" class:list={['rounded-md px-3 py-2 transition-colors hover:bg-white/5 hover:text-[#FF5500]', isActive('/') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Inicio</a>
+      <a href="/menu" class:list={['rounded-md px-3 py-2 transition-colors hover:bg-white/5 hover:text-[#FF5500]', isActive('/menu') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Pedir</a>
+      <a href="/ubicacion" class:list={['rounded-md px-3 py-2 transition-colors hover:bg-white/5 hover:text-[#FF5500]', isActive('/ubicacion') ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Ubicación</a>
+      <a href="/paga-aqui" class:list={['rounded-md px-3 py-2 transition-colors hover:bg-white/5 hover:text-[#FF5500]', (isActive('/paga-aqui') || isActive('/paga-aqui/')) ? 'font-medium text-[#FF5500]' : 'text-[#F5F5F5]']}>Paga aquí</a>
     </div>
   </nav>
 </header>

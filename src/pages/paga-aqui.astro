@@ -5,31 +5,41 @@ import { config } from '../config';
 ---
 
 <Base title="Paga aquí" description="Paga tu pedido SmokyBurger por Bre-B escaneando el código QR.">
-  <section class="mx-auto max-w-lg px-4 py-10 sm:px-6">
-    <h1 class="text-3xl font-bold text-ink">Paga aquí</h1>
-    <p class="mt-2 text-smoke">Escanea el código QR para pagar tu pedido por <strong class="text-ink">Bre-B</strong>.</p>
+  <section class="mx-auto max-w-lg px-4 py-10 sm:px-6 lg:py-14">
+    <div class="mb-6 flex items-start gap-4">
+      <div class="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FF5500]/10 text-[#FF5500]">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wide text-[#FF5500]">Pagos Digitales (Bre-B)</p>
+        <h1 class="mt-1 font-display text-4xl font-bold uppercase tracking-tight text-[#F5F5F5]">Paga aquí</h1>
+      </div>
+    </div>
+    <p class="text-[#A3A3A3]">Escanea el código QR para pagar tu pedido por <strong class="font-semibold text-[#F5F5F5]">Bre-B</strong>.</p>
 
-    <div class="mt-8 rounded-2xl bg-white p-5 shadow-lg sm:p-6">
-      <Image
-        src="/img/bree/Bree.jpg"
-        alt="Código QR de pago Bre-B - SmokyBurger"
-        title="Código QR de pago Bre-B"
-        width={583}
-        height={823}
-        loading="eager"
-        decoding="async"
-        class="mx-auto h-auto w-full max-w-sm rounded-xl border border-black/10 object-contain"
-      />
-      <ol class="mt-5 list-decimal space-y-2 pl-5 text-sm text-ink">
-        <li>Abre la app de tu banco y elige pagar con <strong>Bre-B</strong>.</li>
+    <div class="mt-8 rounded-2xl border border-white/10 bg-[#181818] p-5 sm:p-6">
+      <div class="rounded-xl bg-white p-3">
+        <Image
+          src="/img/bree/Bree.jpg"
+          alt="Código QR de pago Bre-B - SmokyBurger"
+          title="Código QR de pago Bre-B"
+          width={583}
+          height={823}
+          loading="eager"
+          decoding="async"
+          class="mx-auto h-auto w-full max-w-sm object-contain"
+        />
+      </div>
+      <ol class="mt-5 list-decimal space-y-2 pl-5 text-sm text-[#A3A3A3]">
+        <li>Abre la app de tu banco y elige pagar con <strong class="font-medium text-[#F5F5F5]">Bre-B</strong>.</li>
         <li>Escanea este código QR.</li>
         <li>Confirma el valor de tu pedido.</li>
-        <li>Envía el soporte de pago al WhatsApp <a class="font-semibold text-ember underline" href={`https://wa.me/${config.whatsappNumber}`}>{config.whatsappDisplay}</a>.</li>
+        <li>Envía el soporte de pago al WhatsApp <a class="font-semibold text-[#FF5500] underline decoration-[#FF5500]/40 underline-offset-2 hover:text-[#E04800]" href={`https://wa.me/${config.whatsappNumber}`}>{config.whatsappDisplay}</a>.</li>
       </ol>
     </div>
 
     <div class="mt-6 text-center">
-      <a href="/menu" class="inline-flex items-center justify-center rounded-full bg-ember px-6 py-3 text-sm font-bold text-white hover:bg-ember-dark">Ver menú</a>
+      <a href="/menu" class="inline-flex items-center justify-center rounded-xl bg-[#FF5500] px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E04800]">Ver menú</a>
     </div>
   </section>
 </Base>

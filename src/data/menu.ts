@@ -53,7 +53,7 @@ export const productos: Producto[] = [
       'Una explosión de sabor con espíritu argentino. Jugoso chorizo bañado en chimichurri, queso Gouda fundido y nuestro suave pan brioche, acompañado de una irresistible salsa de la casa a base de Jack Daniel’s. Una combinación ahumada, intensa y llena de carácter, creada para quienes disfrutan una burger fuera de lo común.',
     ingredientes: ['Chorizo jugoso', 'Chimichurri', 'Queso Gouda fundido', 'Pan brioche', 'Salsa de la casa a base de Jack Daniel’s'],
     precio: 29000,
-    foto: '/img/burgers/explosion-de-barril.jpg',
+    foto: '/img/burgers/argentina.jpg',
     fotoW: 1792,
     fotoH: 2291,
     categoria: 'Burgers',

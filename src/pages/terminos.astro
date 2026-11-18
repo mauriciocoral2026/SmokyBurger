@@ -3,12 +3,12 @@ import Base from '../layouts/Base.astro';
 import { config } from '../config';
 ---
 <Base title="Términos y condiciones">
-  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-    <h1 class="font-display text-3xl uppercase text-ink">Términos y condiciones</h1>
-    <div class="prose max-w-none mt-6 space-y-4 text-sm leading-relaxed text-ink/70">
+  <section class="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:py-14">
+    <h1 class="font-display text-3xl uppercase tracking-tight text-[#F5F5F5] sm:text-4xl">Términos y condiciones</h1>
+    <div class="prose max-w-none mt-6 space-y-4 rounded-2xl border border-white/10 bg-[#181818] p-6 text-sm leading-relaxed text-[#A3A3A3] sm:p-8">
       <p>Al pedir en {config.brand} aceptas despacho a domicilio según cobertura publicada. Tiempos estimados 30-40 minutos según demanda y distancia.</p>
       <p>Precios en COP. El costo de despacho se confirma por WhatsApp antes de enviar el pedido.</p>
-      <p>Si tu pedido llega con algún problema, escríbenos al WhatsApp {config.whatsappDisplay} con foto y lo resolvemos el mismo día.</p>
+      <p>Si tu pedido llega con algún problema, escríbenos al WhatsApp <a class="font-medium text-[#FF5500] hover:text-[#E04800]" href={`https://wa.me/${config.whatsappNumber}`}>{config.whatsappDisplay}</a> con foto y lo resolvemos el mismo día.</p>
       <p>Este es un MVP placeholder: reemplaza este texto con tus términos reales antes del lanzamiento.</p>
     </div>
   </section>

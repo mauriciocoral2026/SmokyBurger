@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Oswald", "Anton", "Bebas Neue", system-ui, sans-serif;
 
-  /* Paleta Godo Facts */
-  --color-cream: #ebe5d9;
-  --color-ember: #ff520d;
-  --color-ember-dark: #e0480b;
-  --color-ink: #000000;
-  --color-smoke: #666666;
-  --color-pan: #ffc03c;
-  --color-footer: #262626;
+  /* Paleta Dark Smokehouse */
+  --color-cream: #0d0d0d;
+  --color-surface: #181818;
+  --color-border: #2a2a2a;
+  --color-ember: #ff5500;
+  --color-ember-dark: #e04800;
+  --color-ink: #f5f5f5;
+  --color-smoke: #a3a3a3;
+  --color-pan: #2a2a2a;
+  --color-footer: #181818;
 }
 
 html {
@@ -20,7 +22,8 @@ html {
 }
 
 body {
-  background: var(--color-cream);
+  background-color: var(--color-cream);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
   color: var(--color-ink);
   font-family: var(--font-sans);
   overflow-x: clip;
@@ -28,7 +31,8 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .text-stroke {
@@ -38,15 +42,15 @@ body {
 
 .sticker {
   transform: rotate(-3deg);
-  box-shadow: 4px 4px 0 var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-border);
 }
 
 .hard-shadow {
-  box-shadow: 8px 8px 0 var(--color-pan);
+  box-shadow: 8px 8px 0 var(--color-border);
 }
 
 .hard-shadow-sm {
-  box-shadow: 6px 6px 0 var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-border);
 }
 
 button:focus-visible,
@@ -54,7 +58,7 @@ a:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--color-pan);
+  outline: 2px solid var(--color-ember);
   outline-offset: 2px;
 }
 
